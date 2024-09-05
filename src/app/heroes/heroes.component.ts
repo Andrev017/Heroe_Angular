@@ -1,12 +1,12 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Hero } from '../heroe';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { HEROES } from '../mock-heroes';
 import { HeroesServiceService } from '../service/heroes-service.service';
 import { NgIf, NgFor, UpperCasePipe } from '@angular/common';
 import { HeroDetailComponent } from '../hero-detail/hero-detail.component';
 import { MessagesComponent } from '../messages/messages.component';
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-heroes',
@@ -19,12 +19,13 @@ import { MessagesComponent } from '../messages/messages.component';
     NgFor,
     UpperCasePipe,
     HeroDetailComponent,
-    MessagesComponent
-],
+    MessagesComponent,
+    RouterModule,
+  ],
   templateUrl: './heroes.component.html',
   styleUrl: './heroes.component.css',
 })
-export class HeroesComponent {
+export class HeroesComponent implements OnInit {
   selectedHero?: Hero;
 
   heroes: Hero[] = [];
@@ -35,12 +36,7 @@ export class HeroesComponent {
     this.getHeroes();
   }
 
-  onSelect(hero: Hero): void {
-    this.selectedHero = hero;
-  }
-
   getHeroes(): void {
-    this.HeroesServiceService.getHeroes()
-        .subscribe(heroes => this.heroes = heroes);
+    this.HeroesServiceService.getHeroes().subscribe((heroes) => (this.heroes = heroes));
   }
 }

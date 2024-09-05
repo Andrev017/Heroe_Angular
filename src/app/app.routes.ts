@@ -1,12 +1,23 @@
-import { NgModel } from '@angular/forms';
-import { RouteConfigLoadEnd, RouterModule, Routes } from '@angular/router';
+import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
+import { RouterModule, Routes } from '@angular/router';
+import { HeroesComponent } from './heroes/heroes.component';
+import { DashboardComponent } from './dashboard/dashboard.component';
+import { HeroDetailComponent } from './hero-detail/hero-detail.component';
 
-export const routes: Routes = [
-    // {path:'', component:HomeComponent },
+const routes: Routes = [
+    { path: '', redirectTo: '/dashboard', pathMatch: 'full' },
+    { path: 'home', component: HeroesComponent },
+    { path: 'dashboard', component: DashboardComponent},
+    { path: 'detalles', component: HeroDetailComponent},
+];
 
-]; 
+NgModule({
+    imports: [
+        CommonModule, 
+        RouterModule.forRoot(routes)],
+    declarations: [],
+    exports: [RouterModule],
+});
 
-// @NgModel({
-//     import: [RouterModule.forChild(routes)],
-//     export: [RouterModule]
-// })
+export class AppRoutingModule {}
